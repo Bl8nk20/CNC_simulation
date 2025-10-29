@@ -1,0 +1,41 @@
+# docker-compose.yml
+# Usage:
+#  - Development: docker compose --profile dev up
+#  - Release:     docker compose up -d app
+version: "3.9"
+
+x-ports: &default-ports
+  - "8000:8000"
+
+services:
+  # Release / production service (default)
+  app:
+    image: cnc_simulation:latest
+    ports: *default-ports
+    environment:
+      - APP_ENV=production
+    restart: unless-stopped
+    networks:
+      - app-net
+
+  # Development service: active only when profile "dev" is enabled.
+  # Run: docker compose --profile dev up
+  app-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        APP_ENV: development
+    ports: *default-ports
+    environment:
+      - APP_ENV=development
+    volumes:
+      - ./:/app:cached          # mount source for live edits
+    profiles:
+      - dev
+    networks:
+      - app-net
+
+networks:
+  app-net:
+    driver: bridge
