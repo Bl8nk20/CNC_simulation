@@ -22,3 +22,7 @@ The following features are a nice to have features, which are not too esential, 
 * Debugging features
 * Code Completions
 
+## How to run
+
+`docker build -t cnc_sim .`
+`docker run cnc_sim`
