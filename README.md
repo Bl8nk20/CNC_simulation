@@ -24,5 +24,16 @@ The following features are a nice to have features, which are not too esential, 
 
 ## How to run
 
-`docker build -t cnc_sim .`
+`docker build -t cnc_sim .`  
 `docker run cnc_sim`
+
+## Used External Libraries
+
+* Eigen -> Used for simplicity in Matrices and Vector Calculations
+* Boost:Multiprecision -> Used for bigger floats => more precise Calculations
+* Boost:Math -> Used for compatibility -> not sure yet
+* nlohmann_json -> Better Json handling
+* cxxopts -> Easier Command Line Arguments
+* speedlog -> better logging
+* Catch2 -> Used for testing
+* fltk -> lightweight UI library
